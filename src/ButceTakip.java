@@ -4,66 +4,96 @@ import java.util.ArrayList;
 
 public class ButceTakip extends JFrame {
 
-    Color color1 = Color.decode("#190a14"); 
-    Color color2 = Color.decode("#ea5485");
-    Color color3 = Color.decode("#692d91");
-    Color color4 = Color.decode("#f3aebf");
-    
     private JLabel totalLabel;
+    private JLabel label1;
+    private JLabel label2;
     private RoundedTextField descField;
     private RoundedTextField amountField;
+    private RoundedButton incBtn;
+    private RoundedButton expBtn;
     private JTextArea historyArea;
     private double balance = 0.0;
     private ArrayList<String> dataList = new ArrayList<>();
 
     public ButceTakip() {
-        setTitle("Student Budget Planner v2.1");
-        setSize(420, 600);
+        setTitle("Student Budget Planner v3.0");
+        setSize(420, 650);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
-        getContentPane().setBackground(color1);
+
+        JMenuBar mb = new JMenuBar();
+        JMenu m = new JMenu("Themes");
+        JMenuItem t1 = new JMenuItem("Retro Gold");
+        JMenuItem t2 = new JMenuItem("Neon Berry");
+        JMenuItem t3 = new JMenuItem("Natural Light");
+
+        m.add(t1);
+        m.add(t2);
+        m.add(t3);
+        mb.add(m);
+        setJMenuBar(mb);
 
         totalLabel = new JLabel("Wallet: 0.0 $");
         totalLabel.setBounds(20, 20, 300, 40);
         totalLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        totalLabel.setForeground(color4);
         add(totalLabel);
 
-        JLabel label1 = new JLabel("Description:");
+        label1 = new JLabel("Description:");
         label1.setBounds(20, 80, 100, 30);
-        label1.setForeground(Color.WHITE);
         add(label1);
 
         descField = new RoundedTextField(15);
         descField.setBounds(130, 80, 250, 30);
         add(descField);
 
-        JLabel label2 = new JLabel("Amount:");
+        label2 = new JLabel("Amount:");
         label2.setBounds(20, 130, 100, 30);
-        label2.setForeground(Color.WHITE);
         add(label2);
 
         amountField = new RoundedTextField(15);
         amountField.setBounds(130, 130, 250, 30);
         add(amountField);
 
-        RoundedButton incBtn = new RoundedButton("Add Income +");
+        incBtn = new RoundedButton("Add Income +");
         incBtn.setBounds(20, 180, 170, 40);
-        incBtn.setBackground(color2);
-        incBtn.setForeground(Color.WHITE);
         add(incBtn);
 
-        RoundedButton expBtn = new RoundedButton("Add Expense -");
+        expBtn = new RoundedButton("Add Expense -");
         expBtn.setBounds(210, 180, 170, 40);
-        expBtn.setBackground(color3);
-        expBtn.setForeground(Color.WHITE);
         add(expBtn);
 
         historyArea = new JTextArea();
         historyArea.setEditable(false);
         JScrollPane scroll = new JScrollPane(historyArea);
         scroll.setBounds(20, 240, 360, 300);
+        scroll.setBorder(null);
         add(scroll);
+
+        t1.addActionListener(e -> changeColor(
+            Color.decode("#46244C"), 
+            Color.decode("#D49B54"), 
+            Color.decode("#C74B50"), 
+            Color.decode("#D49B54"), 
+            Color.WHITE
+        ));
+
+        t2.addActionListener(e -> changeColor(
+            Color.decode("#180A0A"), 
+            Color.decode("#F10086"), 
+            Color.decode("#711A75"), 
+            Color.decode("#F582A7"), 
+            Color.WHITE
+        ));
+
+        t3.addActionListener(e -> changeColor(
+            Color.decode("#EEEEEE"), 
+            Color.decode("#8B9A46"), 
+            Color.decode("#541212"), 
+            Color.BLACK, 
+            Color.BLACK
+        ));
+
+        changeColor(Color.decode("#190a14"), Color.decode("#ea5485"), Color.decode("#692d91"), Color.decode("#f3aebf"), Color.WHITE);
 
         incBtn.addActionListener(e -> {
             try {
@@ -105,6 +135,22 @@ public class ButceTakip extends JFrame {
 
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    private void changeColor(Color bg, Color b1, Color b2, Color txt, Color lbl) {
+        getContentPane().setBackground(bg);
+        totalLabel.setForeground(txt);
+        label1.setForeground(lbl);
+        label2.setForeground(lbl);
+        incBtn.setBackground(b1);
+        expBtn.setBackground(b2);
+        descField.setForeground(lbl);
+        descField.setCaretColor(lbl);
+        amountField.setForeground(lbl);
+        amountField.setCaretColor(lbl);
+        historyArea.setBackground(bg);
+        historyArea.setForeground(lbl);
+        repaint();
     }
 
     private void updateList() {
