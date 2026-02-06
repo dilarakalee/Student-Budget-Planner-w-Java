@@ -8,7 +8,7 @@ public class RoundedTextField extends JTextField {
     public RoundedTextField(int columns) {
         super(columns);
         setOpaque(false);
-        setBorder(new EmptyBorder(0, 10, 0, 10)); 
+        setBorder(new EmptyBorder(0, 10, 0, 10));
     }
     
     @Override
