@@ -128,7 +128,7 @@ public class ButceTakip extends JFrame {
 
             if (!desc.isEmpty()) {
                 if (!isInc && amt > currentBal) {
-                    JOptionPane.showMessageDialog(null, "Not enough money bro :(");
+                    JOptionPane.showMessageDialog(null, "Not enough money :(");
                     return;
                 }
 
@@ -232,4 +232,5 @@ public class ButceTakip extends JFrame {
     public static void main(String[] args) {
         new ButceTakip();
     }
+
 }
